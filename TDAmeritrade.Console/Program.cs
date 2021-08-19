@@ -18,6 +18,8 @@ namespace TDConsole
             }
         }
 
+        TDAmeritrade.Console.HelperMethods Help = new TDAmeritrade.Console.HelperMethods();
+
         TDUnprotectedCache cache;
         TDAmeritradeClient client;
         FileStream stream;
@@ -70,6 +72,13 @@ namespace TDConsole
 
         public async Task SignIn()
         {
+            Help.LoadCredintialsFromFile();
+            if (Help.CredintialFound)
+            {
+                Console.WriteLine("Credintial Found and Loaded from File");
+                return;
+            }
+
             Console.WriteLine("Paste consumer key : (https://developer.tdameritrade.com/user/me/apps)");
             var consumerKey = Console.ReadLine();
             Console.WriteLine("Opening Browser. Please sign in.");
